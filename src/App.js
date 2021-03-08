@@ -13,6 +13,8 @@ const App = () => {
   const [valuationThree, setValuationThree] = useState([]);
   const [valuationFour, setValuationFour] = useState([]);
 
+  console.log(valuationOne);
+
   const handleValuationOne = (e) => {
     setValuationOne((prevState) => ({
       ...prevState,
