@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import Header from "./components/Header";
@@ -13,45 +13,64 @@ const App = () => {
   const [valuationThree, setValuationThree] = useState([]);
   const [valuationFour, setValuationFour] = useState([]);
 
-  console.log(valuationOne);
+  const handleValuationOne = useCallback(
+    (e) => {
+      setValuationOne((prevState) => ({
+        ...prevState,
+        [e.target.name]: e.target.value,
+      }));
+    },
+    [setValuationOne]
+  );
 
-  const handleValuationOne = (e) => {
-    setValuationOne((prevState) => ({
-      ...prevState,
-      [e.target.name]: e.target.value,
-    }));
-  };
+  const handleValuationTwo = useCallback(
+    (e) => {
+      setValuationTwo((prevState) => ({
+        ...prevState,
+        [e.target.name]: e.target.value,
+      }));
+    },
+    [setValuationTwo]
+  );
 
-  const handleValuationTwo = (e) => {
-    setValuationTwo((prevState) => ({
-      ...prevState,
-      [e.target.name]: e.target.value,
-    }));
-  };
+  const handleValuationThree = useCallback(
+    (e) => {
+      setValuationThree((prevState) => ({
+        ...prevState,
+        [e.target.name]: e.target.value,
+      }));
+    },
+    [setValuationThree]
+  );
 
-  const handleValuationThree = (e) => {
-    setValuationThree((prevState) => ({
-      ...prevState,
-      [e.target.name]: e.target.value,
-    }));
-  };
+  const handleValuationFour = useCallback(
+    (e) => {
+      setValuationFour((prevState) => ({
+        ...prevState,
+        [e.target.name]: e.target.value,
+      }));
+    },
+    [setValuationFour]
+  );
 
-  const handleValuationFour = (e) => {
-    setValuationFour((prevState) => ({
-      ...prevState,
-      [e.target.name]: e.target.value,
-    }));
-  };
-
-  const addJSON = (e) => {
-    e.preventDefault();
-    setTotalValuation({
-      aspek_penilaian_1: { ...valuationOne },
-      aspek_penilaian_2: { ...valuationTwo },
-      aspek_penilaian_3: { ...valuationThree },
-      aspek_penilaian_4: { ...valuationFour },
-    });
-  };
+  const addJSON = useCallback(
+    (e) => {
+      e.preventDefault();
+      setTotalValuation({
+        aspek_penilaian_1: { ...valuationOne },
+        aspek_penilaian_2: { ...valuationTwo },
+        aspek_penilaian_3: { ...valuationThree },
+        aspek_penilaian_4: { ...valuationFour },
+      });
+    },
+    [
+      valuationOne,
+      valuationTwo,
+      valuationThree,
+      valuationFour,
+      setTotalValuation,
+    ]
+  );
 
   return (
     <div className="App">

@@ -1,6 +1,7 @@
-import React from "react";
+import React, { memo } from "react";
 
 function Header() {
+  console.log("header rerender");
   return (
     <div>
       <h1 className="header">Aplikasi Penilaian Mahasiswa</h1>
@@ -8,4 +9,4 @@ function Header() {
   );
 }
 
-export default Header;
+export default memo(Header);

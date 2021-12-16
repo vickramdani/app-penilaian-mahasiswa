@@ -1,6 +1,7 @@
-import React from "react";
+import React, { memo } from "react";
 
 function DisplayJson({ totalValuation }) {
+  console.log("display json rerender");
   return (
     <div
       className="display-json"
@@ -13,4 +14,4 @@ function DisplayJson({ totalValuation }) {
   );
 }
 
-export default DisplayJson;
+export default memo(DisplayJson);

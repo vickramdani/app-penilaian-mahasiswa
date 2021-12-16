@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { memo } from "react";
 import { Table, Button } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserCircle } from "@fortawesome/free-solid-svg-icons";
@@ -13,57 +13,7 @@ function ContentTable({
   handleValuationFour,
   addJSON,
 }) {
-  const memoizeRow = useMemo(() => {
-    return (
-      <>
-        {names.map((name) => (
-          <tr key={name.value}>
-            <td>
-              <FontAwesomeIcon icon={faUserCircle} /> {name.name}
-            </td>
-
-            <td className="text-center">
-              <select name={name.value} onChange={handleValuationOne}>
-                {options.map((option) => (
-                  <option value={option.value}>{option.value}</option>
-                ))}
-              </select>
-            </td>
-
-            <td className="text-center">
-              <select name={name.value} onChange={handleValuationTwo}>
-                {options.map((option) => (
-                  <option value={option.value}>{option.value}</option>
-                ))}
-              </select>
-            </td>
-
-            <td className="text-center">
-              <select name={name.value} onChange={handleValuationThree}>
-                {options.map((option) => (
-                  <option value={option.value}>{option.value}</option>
-                ))}
-              </select>
-            </td>
-
-            <td className="text-center">
-              <select name={name.value} onChange={handleValuationFour}>
-                {options.map((option) => (
-                  <option value={option.value}>{option.value}</option>
-                ))}
-              </select>
-            </td>
-          </tr>
-        ))}
-      </>
-    );
-  }, [
-    handleValuationOne,
-    handleValuationTwo,
-    handleValuationThree,
-    handleValuationFour,
-  ]);
-
+  console.log("table rerendering");
   return (
     <div className="table-content">
       <Table bordered hover responsive>
@@ -76,16 +26,63 @@ function ContentTable({
             <th>Aspek Penilaian 4</th>
           </tr>
         </thead>
-        <tbody>{memoizeRow}</tbody>
+        <tbody>
+          {names.map((name) => (
+            <tr key={name.value}>
+              <td>
+                <FontAwesomeIcon icon={faUserCircle} /> {name.name}
+              </td>
+
+              <td className="text-center">
+                <select name={name.value} onChange={handleValuationOne}>
+                  {options.map((option) => (
+                    <option value={option.value} key={option.value}>
+                      {option.value}
+                    </option>
+                  ))}
+                </select>
+              </td>
+
+              <td className="text-center">
+                <select name={name.value} onChange={handleValuationTwo}>
+                  {options.map((option) => (
+                    <option value={option.value} key={option.value}>
+                      {option.value}
+                    </option>
+                  ))}
+                </select>
+              </td>
+
+              <td className="text-center">
+                <select name={name.value} onChange={handleValuationThree}>
+                  {options.map((option) => (
+                    <option value={option.value} key={option.value}>
+                      {option.value}
+                    </option>
+                  ))}
+                </select>
+              </td>
+
+              <td className="text-center">
+                <select name={name.value} onChange={handleValuationFour}>
+                  {options.map((option) => (
+                    <option value={option.value} key={option.value}>
+                      {option.value}
+                    </option>
+                  ))}
+                </select>
+              </td>
+            </tr>
+          ))}
+        </tbody>
       </Table>
       <form onSubmit={addJSON}>
         <Button variant="dark" type="submit">
           Simpan
         </Button>
-        {/* <button type="submit">Simpan</button> */}
       </form>
     </div>
   );
 }
 
-export default ContentTable;
+export default memo(ContentTable);
